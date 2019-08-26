@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Television</title>
+</head>
+<body>
+
+<input type="button" value="Television" onclick="showTelevision()"><br/>
+<input type="button" value="Power" onclick="remote.turnTelevision()"><br/>
+<input type="button" value="C +" onclick="remote.upChannelR()">
+<input type="button" value="C -" onclick="remote.downChannelR()"><br/>
+<input type="button" value="V +" onclick="remote.upVolumeR()">
+<input type="button" value="V -" onclick="remote.downVolumeR()"><br/>
+
+<script>
+    let Television = function (status, channel, volume) {
+        this.status = status;
+        this.channel = channel;
+        this.volume = volume;
+
+        this.getInformation = function () {
+          return this.status + ' ' + this.channel + ' ' + this.volume;
+        };
+        this.upVolume = function () {
+            if(this.volume < 100) {
+                this.volume++ ;
+            }
+        };
+        this.downVolume = function () {
+            if(this.volume > 0) {
+                this.volume-- ;
+            }
+        };
+        this.upChannel = function () {
+            if(this.channel < 100) {
+                this.channel++ ;
+            }
+        };
+        this.downChannel = function () {
+            if(this.channel > 0) {
+                this.channel-- ;
+            }
+        };
+    };
+    
+    let Remote = function (television) {
+        this.turnTelevision = function () {
+            if(television.status) {
+                television.status = false;
+            } else {
+                television.status = true;
+            }
+            alert(television.status);
+        };
+        this.upChannelR = function () {
+            if(television.status) {
+                television.upChannel();
+                alert(television.channel);
+            } else {
+                alert("The Television is OFF!")
+            }
+        };
+        this.downChannelR = function () {
+            if(television.status) {
+                television.downChannel();
+                alert(television.channel);
+            } else {
+                alert("The Television is OFF!")
+            }
+        };
+        this.downVolumeR = function () {
+            if(television.status) {
+                television.downVolume();
+                alert(television.volume);
+            } else {
+                alert("The Television is OFF!")
+            }
+        };
+        this.upVolumeR = function () {
+            if(television.status) {
+                television.upVolume();
+                alert(television.volume);
+            } else {
+                alert("The Television is OFF!")
+            }
+        };
+    };
+
+    let television = new Television(false, 7, 30);
+    let remote = new Remote(television);
+
+    function showTelevision(){
+        alert(television.getInformation());
+    }
+</script>
+
+</body>
+</html>
